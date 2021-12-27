@@ -5,8 +5,8 @@
 package utilities
 
 /*
-#cgo CFLAGS: -DLIN -DSIMDATA_EXPORTS -DXPLM200=1 -DXPLM210=1 -DXPLM300=1 -DXPLM301=1
-#cgo LDFLAGS: -Xlinker "--unresolved-symbols=ignore-all"
+#cgo CFLAGS: -I ./SDK/CHeaders -fPIC -DSIMDATA_EXPORTS -DXPLM200=1 -DXPLM210=1 -DXPLM300=1 -DXPLM301=1 -DXPLM302=1 -DXPLM303=1
+#cgo LDFLAGS: -shared
 #include <XPLM/XPLMUtilities.h>
 #include <stdlib.h>
 #include <string.h>

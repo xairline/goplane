@@ -7,10 +7,10 @@ package extra
 import "C"
 import (
 	"fmt"
-	"github.com/abieberbach/goplane/extra/logging"
-	"github.com/abieberbach/goplane/xplm/plugins"
-	"github.com/abieberbach/goplane/xplm/processing"
-	"github.com/abieberbach/goplane/xplm/utilities"
+	"github.com/xairline/goplane/extra/logging"
+	"github.com/xairline/goplane/xplm/plugins"
+	"github.com/xairline/goplane/xplm/processing"
+	"github.com/xairline/goplane/xplm/utilities"
 	"unsafe"
 )
 

@@ -2,7 +2,7 @@ package logging
 
 import (
 	"fmt"
-	"github.com/abieberbach/goplane/xplm/utilities"
+	"github.com/xairline/goplane/xplm/utilities"
 	"strings"
 )
 
@@ -13,20 +13,20 @@ type Level struct {
 }
 
 var (
-//Loglevel für Tracemeldungen
+	//Loglevel für Tracemeldungen
 	Trace_Level = Level{1, "TRACE"}
-//Loglevel für Debugmeldungen
+	//Loglevel für Debugmeldungen
 	Debug_Level = Level{2, "DEBUG"}
-//Loglevel für Infomeldungen
+	//Loglevel für Infomeldungen
 	Info_Level = Level{3, "INFO"}
-//Loglevel für Warnungen
+	//Loglevel für Warnungen
 	Warning_Level = Level{4, "WARNING"}
-//Loglevel für Fehler
+	//Loglevel für Fehler
 	Error_Level = Level{5, "ERROR"}
 
-//Level ab dem die Meldungen ausgegeben werden
+	//Level ab dem die Meldungen ausgegeben werden
 	MinLevel = Info_Level
-//aktueller Pluginname
+	//aktueller Pluginname
 	PluginName = "<unknown>"
 )
 
@@ -55,7 +55,7 @@ func Trace(msg string) {
 }
 
 //Schreibt eine formatierte Tracemeldung in die Logdatei
-func Tracef(format string, a... interface{}) {
+func Tracef(format string, a ...interface{}) {
 	if Trace_Level.number >= MinLevel.number {
 		Trace(fmt.Sprintf(format, a...))
 	}
@@ -67,7 +67,7 @@ func Debug(msg string) {
 }
 
 //Schreibt eine formatierte Debugmeldung in die Logdatei
-func Debugf(format string, a... interface{}) {
+func Debugf(format string, a ...interface{}) {
 	if Debug_Level.number >= MinLevel.number {
 		Debug(fmt.Sprintf(format, a...))
 	}
@@ -79,7 +79,7 @@ func Info(msg string) {
 }
 
 //Schreibt eine formatierte Infomeldung in die Logdatei
-func Infof(format string, a... interface{}) {
+func Infof(format string, a ...interface{}) {
 	if Info_Level.number >= MinLevel.number {
 		Info(fmt.Sprintf(format, a...))
 	}
@@ -91,12 +91,11 @@ func Warning(msg string) {
 }
 
 //Schreibt eine formatierte Warnung in die Logdatei
-func Warningf(format string, a... interface{}) {
+func Warningf(format string, a ...interface{}) {
 	if Warning_Level.number >= MinLevel.number {
 		Warning(fmt.Sprintf(format, a...))
 	}
 }
-
 
 //Schreibt eine Fehlermeldung in die Logdatei
 func Error(msg string) {
@@ -104,7 +103,7 @@ func Error(msg string) {
 }
 
 //Schreibt eine formatierte Fehlermeldung in die Logdatei
-func Errorf(format string, a... interface{}) {
+func Errorf(format string, a ...interface{}) {
 	if Error_Level.number >= MinLevel.number {
 		Error(fmt.Sprintf(format, a...))
 	}

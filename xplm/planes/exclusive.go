@@ -5,8 +5,8 @@
 package planes
 
 /*
-#cgo CFLAGS: -DLIN -DSIMDATA_EXPORTS -DXPLM200=1 -DXPLM210=1 -DXPLM300=1 -DXPLM301=1
-#cgo LDFLAGS: -Xlinker "--unresolved-symbols=ignore-all"
+#cgo CFLAGS: -I ./SDK/CHeaders -fPIC -DSIMDATA_EXPORTS -DXPLM200=1 -DXPLM210=1 -DXPLM300=1 -DXPLM301=1 -DXPLM302=1 -DXPLM303=1
+#cgo LDFLAGS: -shared
 #include <XPLM/XPLMPlanes.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,8 +30,9 @@ extern void planesAvailableCallback(void* ref);
 */
 import "C"
 import (
-	"github.com/abieberbach/goplane"
 	"unsafe"
+
+	"github.com/xairline/goplane"
 )
 
 type PlaneDrawState struct {

@@ -5,8 +5,8 @@
 package processing
 
 /*
-#cgo CFLAGS: -DLIN -DSIMDATA_EXPORTS -DXPLM200=1 -DXPLM210=1 -DXPLM300=1 -DXPLM301=1
-#cgo LDFLAGS: -Xlinker "--unresolved-symbols=ignore-all"
+#cgo CFLAGS: -I ./SDK/CHeaders -fPIC -DSIMDATA_EXPORTS -DXPLM200=1 -DXPLM210=1 -DXPLM300=1 -DXPLM301=1 -DXPLM302=1 -DXPLM303=1
+#cgo LDFLAGS: -shared
 #include <XPLM/XPLMProcessing.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,10 +17,11 @@ extern float flightLoop(float elapsedSinceLastCall,float elapsedTimeSinceLastFli
 import "C"
 import (
 	"fmt"
-	"github.com/abieberbach/goplane"
-	"github.com/abieberbach/goplane/extra/logging"
-	"github.com/go-errors/errors"
 	"unsafe"
+
+	"github.com/go-errors/errors"
+	"github.com/xairline/goplane"
+	"github.com/xairline/goplane/extra/logging"
 )
 
 type FlightLoopPhaseType int
