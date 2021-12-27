@@ -26,3 +26,6 @@ _testmain.go
 *.prof
 
 go.sum
+
+*.xpl
+examples/dist/mac.xpl

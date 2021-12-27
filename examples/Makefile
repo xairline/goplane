@@ -1,11 +1,11 @@
 clean:
-	rm -r dist
+	rm -r dist || true
 
 mac:
 	GOOS=darwin \
 	GOARCH=amd64 \
 	CGO_ENABLED=1 \
-	CGO_CFLAGS="-I/Users/dzou/Downloads/SDK/CHeaders -DAPL=1 -DIBM=0 -DLIN=0 -DXPLM_DEPRECATED=1" \
+	CGO_CFLAGS="-DAPL=1 -DIBM=0 -DLIN=0 -DXPLM_DEPRECATED=1" \
 	CGO_LDFLAGS="-F/System/Library/Frameworks/ -F/Users/dzou/Downloads/SDK/Libraries/Mac -framework XPLM" \
 	go build -buildmode c-shared -o dist/mac.xpl TestPlugin.go
 win:
