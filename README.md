@@ -1,4 +1,5 @@
-# goplane
+# goplane (fored)
+> This is a fork with some modifications/examples to allow cross platform compile
 
 [![GoDoc](https://godoc.org/github.com/xairline/goplane?status.svg)](https://godoc.org/github.com/xairline/goplane)
 
