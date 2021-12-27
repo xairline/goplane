@@ -28,4 +28,3 @@ _testmain.go
 go.sum
 
 *.xpl
-examples/dist/mac.xpl
