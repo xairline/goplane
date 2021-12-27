@@ -1,26 +1,26 @@
 # goplane
-[![GoDoc](https://godoc.org/github.com/abieberbach/goplane?status.svg)](https://godoc.org/github.com/abieberbach/goplane)
+[![GoDoc](https://godoc.org/github.com/xairline/goplane?status.svg)](https://godoc.org/github.com/xairline/goplane)
 
-Implementierung des [X-Plane SDKs](http://www.xsquawkbox.net/xpsdk/mediawiki/Main_Page) auf der Basis von [GO](http://www.golang.org)
+Implementation of the [X-Plane SDK] (http://www.xsquawkbox.net/xpsdk/mediawiki/Main_Page) based on [GO] (http://www.golang.org)
 
-## Voraussetzungen
+## Requirements
 
-1. [GO Version 1.5](http://www.golang.org) muss installiert sein
-2. Das [X-Plane SDK](http://www.xsquawkbox.net/xpsdk/mediawiki/Main_Page) (min. Version 2.1.3) muss heruntergeladen und in einem Ordner entpackt sein.
+1. [GO Version 1.5](http://www.golang.org) must be installed
+2. The [X-Plane SDK](http://www.xsquawkbox.net/xpsdk/mediawiki/Main_Page) (min. Version 2.1.3) must be downloaded and unzipped in a folder.
 
-## Beispiel-Plugin
+## Example Plugin
 ```
 package main
 import (
-	"github.com/abieberbach/goplane/extra"
-	"github.com/abieberbach/goplane/extra/logging"
+	"github.com/xairline/goplane/extra"
+	"github.com/xairline/goplane/extra/logging"
 )
 
 func main() {
 }
 
 func init() {
-	plugin := extra.NewPlugin("TestPlugin", "com.github.abieberbach.goplane.TestPlugin", "TestPlugin")
+	plugin := extra.NewPlugin("TestPlugin", "com.github.xairline.goplane.TestPlugin", "TestPlugin")
 	plugin.SetPluginStateCallback(onPluginStateChanged)
 	logging.MinLevel = logging.Info_Level
 }
@@ -44,24 +44,24 @@ func onPluginEnable() {
 }
 ```
 
-## Plugin kompilieren
+## Compile the plugin
 
-Damit das Plugin kompiliert werden kann, muss dem System mitgeteilt werden, wo sich die Include-Dateien des SDKs befinden.
-Dazu muss die Umgebungsvariable "CGO_CFLAGS" auf den Pfad des SDKs gesetzt werden.
+So that the plug-in can be compiled, the system must be told where the include files of the SDK are located.
+To do this, the environment variable "CGO_CFLAGS" must be set to the path of the SDK.
 
 ```
-Linux: export CGO_CFLAGS='-I <Pfad zum SDK>/CHeaders'
+Linux: export CGO_CFLAGS='-I <PATH_TO_SDK>/CHeaders'
 ```
 
-Im Anschluss kann das Plugin mit dem go Tool gebaut werden:
+The plugin can then be built with the go tool:
 
 ```
 Linux: go build -o lin.xpl -buildmode=c-shared  TestPlugin.go
 ```
 
-## Unterstütze Plattformen
+## Supported platforms
 
 - Linux: x64
-- Mac: nicht getestet
-- Windows: nicht unterstützt (siehe offenen Issue bei GO https://github.com/golang/go/issues/11058)
+- Mac: not tested
+- Windows: not supported (see open issue at GO https://github.com/golang/go/issues/11058)
 
