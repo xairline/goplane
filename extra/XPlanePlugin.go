@@ -7,14 +7,15 @@ package extra
 import "C"
 import (
 	"fmt"
+	"unsafe"
+
 	"github.com/xairline/goplane/extra/logging"
 	"github.com/xairline/goplane/xplm/plugins"
 	"github.com/xairline/goplane/xplm/processing"
 	"github.com/xairline/goplane/xplm/utilities"
-	"unsafe"
 )
 
-//Basisstruktur für ein X-Plane Plugin.
+//Basic structure for an X-Plane plugin.
 type XPlanePlugin struct {
 	id                 plugins.PluginId
 	name               string
@@ -27,7 +28,7 @@ type XPlanePlugin struct {
 	stateCallback      PluginStateCallback
 }
 
-//Status eines Plugins für die Callback-Funktion.
+//Status of a plug-in for the Callback-Funktion.
 type PluginState int
 
 const (
@@ -37,17 +38,17 @@ const (
 	PluginStop    PluginState = 3 //Plugin wird gestoppt
 )
 
-//Callback-Funktion für den Statuswechsel eines Plugins.
+//Callback-Funktion for the status change of a plugin.
 type PluginStateCallback func(state PluginState, plugin *XPlanePlugin)
 
-//Messagehandler der die empfange Nachricht als Debugmeldung schreibt.
+//Message handler that writes the received message as a debug message.
 func DebugMessageHandler(msg plugins.Message) {
 	name, _, _, _ := plugins.GetPluginInfo(msg.PluginId)
 	logging.Debug(fmt.Sprintf("receive message from %v (ID: %v): %v", name, msg.PluginId, msg.MessageId))
 }
 
 var (
-	plugin *XPlanePlugin //globale Plugin-Instanz
+	plugin *XPlanePlugin //globale Plugin Instance
 )
 
 //Erzeugt ein neues Plugin.
