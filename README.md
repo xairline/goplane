@@ -5,7 +5,7 @@ Implementation of the [X-Plane SDK] (http://www.xsquawkbox.net/xpsdk/mediawiki/M
 
 ## Requirements
 
-1. [GO Version 1.5](http://www.golang.org) must be installed
+1. [GO Version 1.7](http://www.golang.org) must be installed
 2. The [X-Plane SDK](http://www.xsquawkbox.net/xpsdk/mediawiki/Main_Page) (min. Version 2.1.3) must be downloaded and unzipped in a folder.
 
 ## Example Plugin
