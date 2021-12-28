@@ -2,36 +2,37 @@ package logging
 
 import (
 	"fmt"
-	"github.com/xairline/goplane/xplm/utilities"
 	"strings"
+
+	"github.com/xairline/goplane/xplm/utilities"
 )
 
-//Informationen über ein Loglevel
+// Information about a loglevel
 type Level struct {
-	number byte   //Nummer des Loglevels
-	name   string //Name des Loglevels
+	number byte   // number then log levels
+	name   string //name then Log levels
 }
 
 var (
-	//Loglevel für Tracemeldungen
+	// Loglevel for trace messages
 	Trace_Level = Level{1, "TRACE"}
-	//Loglevel für Debugmeldungen
+	// Loglevel for debug reports
 	Debug_Level = Level{2, "DEBUG"}
-	//Loglevel für Infomeldungen
+	// Loglevel for info messages
 	Info_Level = Level{3, "INFO"}
-	//Loglevel für Warnungen
+	// Loglevel for warnings
 	Warning_Level = Level{4, "WARNING"}
-	//Loglevel für Fehler
+	// Loglevel for error
 	Error_Level = Level{5, "ERROR"}
 
-	//Level ab dem die Meldungen ausgegeben werden
+	// Level from which the messages are output
 	MinLevel = Info_Level
-	//aktueller Pluginname
+	// Current PluginName
 	PluginName = "<unknown>"
 )
 
-//Ermittelt aus einem String das entsprechende Loglevel. Mögliche Werte sind: TRACE, DEBUG, INFO, WARNING, ERROR.
-//Wird ein anderer String verwendet, dann liefert die Methode das Info-Level
+// If a string determines the corresponding loglevel.Possible values are: trace, debug, info, warning, error.
+// If another string is used, then the method returns the info level
 func GetLevelFromString(level string) Level {
 	switch strings.ToUpper(level) {
 	case "TRACE":
@@ -49,60 +50,60 @@ func GetLevelFromString(level string) Level {
 	}
 }
 
-//Schreibt eine Tracemeldung in die Logdatei
+// writes a trace message into the log file
 func Trace(msg string) {
 	writeMessage(Trace_Level, msg)
 }
 
-//Schreibt eine formatierte Tracemeldung in die Logdatei
+// writes a formatted trace message into the log file
 func Tracef(format string, a ...interface{}) {
 	if Trace_Level.number >= MinLevel.number {
 		Trace(fmt.Sprintf(format, a...))
 	}
 }
 
-//Schreibt eine Debugmeldung in die Logdatei
+// writes a debug message into the log file
 func Debug(msg string) {
 	writeMessage(Debug_Level, msg)
 }
 
-//Schreibt eine formatierte Debugmeldung in die Logdatei
+// writes a formatted debug message into the log file
 func Debugf(format string, a ...interface{}) {
 	if Debug_Level.number >= MinLevel.number {
 		Debug(fmt.Sprintf(format, a...))
 	}
 }
 
-//Schreibt eine Infomeldung in die Logdatei
+// writes an info message into the log file
 func Info(msg string) {
 	writeMessage(Info_Level, msg)
 }
 
-//Schreibt eine formatierte Infomeldung in die Logdatei
+// writes a formatted information message into the log file
 func Infof(format string, a ...interface{}) {
 	if Info_Level.number >= MinLevel.number {
 		Info(fmt.Sprintf(format, a...))
 	}
 }
 
-//Schreibt eine Warnung in die Logdatei
+// writes a warning in the log file
 func Warning(msg string) {
 	writeMessage(Warning_Level, msg)
 }
 
-//Schreibt eine formatierte Warnung in die Logdatei
+// writes a formatted warning into the log file
 func Warningf(format string, a ...interface{}) {
 	if Warning_Level.number >= MinLevel.number {
 		Warning(fmt.Sprintf(format, a...))
 	}
 }
 
-//Schreibt eine Fehlermeldung in die Logdatei
+// writes an error message to the log file
 func Error(msg string) {
 	writeMessage(Error_Level, msg)
 }
 
-//Schreibt eine formatierte Fehlermeldung in die Logdatei
+// writes a formatted error message into the log file
 func Errorf(format string, a ...interface{}) {
 	if Error_Level.number >= MinLevel.number {
 		Error(fmt.Sprintf(format, a...))

@@ -1,18 +1,18 @@
-//Copyright (c) 2015. The goplane AUTHORS. All rights reserved.
+//copyright (c)2015TheGoplaneAuthorsAllRightsReserved
 //
 // Use of this source code is governed by a license that can be found in the LICENSE file.
 
-//Enthält zusätzliche Funktionalitäten außerhalb des offiziellen X-Plane SDKs.
+// contains additional functionalities outside the official X-Plane SDKS.
 //
 //Logging
 //
-//Logging ist ein einfaches Logging-Framework, das entsprechend der Einstellungen ggf. Ausgaben über die Methode utilities.DebugString in die log.txt von X-Plane schreibt.
+// Logging is a simple logging framework that, in accordance with the settings, if necessary, editions about the method Utilities.DebugString writes to the X-TXT log.txt.
 //
 //XPlanePlugin
 //
-//Basistruktur für eine einfache Erstellung eines X-Plane Plugins.
+// Basisuture for easy creation of an X-Plant plugin.
 //
 //DataRefs
 //
-//Zusätzliche Funktionen für den Umgang mit DataRefs
+// Additional functions for dealing with DataFefs
 package extra

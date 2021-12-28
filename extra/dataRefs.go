@@ -6,15 +6,16 @@ package extra
 */
 import "C"
 import (
-	"github.com/xairline/goplane/xplm/plugins"
 	"unsafe"
+
+	"github.com/xairline/goplane/xplm/plugins"
 )
 
-//Registriert die übergebenen DataRefs entweder beim DataRefEditor (http://www.xsquawkbox.net/xpsdk/mediawiki/DataRefEditor) bzw. beim DataRefTool (https://github.com/leecbaker/datareftool)
+// Registers the transferred DataRefs either at the DataRefEditor (http://www.xsquawkbox.net/xpsdk/mediawiki/datareefeditor) or the DataTheTool (https://github.com/leecbaker/datareefttool)
 func RegisterDataRefToDataRefEditor(name ...string) bool {
 	pluginId := plugins.FindPluginBySignature("xplanesdk.examples.DataRefEditor")
 	if pluginId == plugins.NO_PLUGIN_ID {
-		//DataRefEditor nicht vorhanden --> evt. DataRefTool?
+		// DataRefeditor not available -> evt. DataRefTool?
 		pluginId = plugins.FindPluginBySignature("com.leecbaker.datareftool")
 		if pluginId == plugins.NO_PLUGIN_ID {
 			return false

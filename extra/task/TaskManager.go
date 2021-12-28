@@ -35,7 +35,7 @@ func (self *TaskManager) processTaskLoop(elapsedSinceLastCall, elapsedTimeSinceL
 			req.result, req.taskError = req.taskFunction(req.data)
 			req.doneChannel <- true
 		default:
-			//es gibt nichts zum verarbeiten
+			//There is nothing to handle
 			return 0.0
 		}
 	}

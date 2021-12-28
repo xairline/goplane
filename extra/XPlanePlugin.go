@@ -15,7 +15,7 @@ import (
 	"github.com/xairline/goplane/xplm/utilities"
 )
 
-//Basic structure for an X-Plane plugin.
+//basicStructureForAnXPlanePlugin
 type XPlanePlugin struct {
 	id                 plugins.PluginId
 	name               string
@@ -28,17 +28,17 @@ type XPlanePlugin struct {
 	stateCallback      PluginStateCallback
 }
 
-//Status of a plug-in for the Callback-Funktion.
+//statusOfAPlugInForTheCallbackFunktion
 type PluginState int
 
 const (
-	PluginStart   PluginState = 0 //Plugin wird gestartet
-	PluginEnable  PluginState = 1 //Plugin wird aktiviert
-	PluginDisable PluginState = 2 //Plugin wird deaktiviert
-	PluginStop    PluginState = 3 //Plugin wird gestoppt
+	PluginStart   PluginState = 0 // Plugin is started
+	PluginEnable  PluginState = 1 // Plugin is activated
+	PluginDisable PluginState = 2 // Plugin is deactivated
+	PluginStop    PluginState = 3 // Plugin is stopped
 )
 
-//Callback-Funktion for the status change of a plugin.
+//Callback-Function for the status change of a plugin.
 type PluginStateCallback func(state PluginState, plugin *XPlanePlugin)
 
 //Message handler that writes the received message as a debug message.
@@ -48,10 +48,10 @@ func DebugMessageHandler(msg plugins.Message) {
 }
 
 var (
-	plugin *XPlanePlugin //globale Plugin Instance
+	plugin *XPlanePlugin // Global plugin instance
 )
 
-//Erzeugt ein neues Plugin.
+// creates a new plugin.
 func NewPlugin(name, signature, description string) *XPlanePlugin {
 	logging.PluginName = name
 	plugin = &XPlanePlugin{plugins.NO_PLUGIN_ID, name, signature, description, nil, nil, 1.0, nil, nil}
@@ -63,7 +63,7 @@ func NewPlugin(name, signature, description string) *XPlanePlugin {
 	return plugin
 }
 
-//Liefert die ID des Plugins.
+// Returns the ID of the plugin.
 func (self *XPlanePlugin) GetId() plugins.PluginId {
 	if self.id == -plugins.NO_PLUGIN_ID {
 		self.id = plugins.GetMyId()
@@ -71,43 +71,43 @@ func (self *XPlanePlugin) GetId() plugins.PluginId {
 	return self.id
 }
 
-//Liefert den Namen des Plugins.
+// supplies the name of the plugin.
 func (self *XPlanePlugin) GetName() string {
 	return self.name
 }
 
-//Liefert die Beschreibung des Plugins.
+// Returns the description of the plugin.
 func (self *XPlanePlugin) GetDescription() string {
 	return self.description
 }
 
-//Liefert die Signatur des Plugins.
+// delivers the signature of the plugin.
 func (self *XPlanePlugin) GetSignature() string {
 	return self.signature
 }
 
-//Liefert den MessageHandler des Plugins.
+// Returns the messager of the plugin.
 func (self *XPlanePlugin) GetMessageHandler() plugins.MessageHandler {
 	return self.messageHandler
 }
 
-//Setzt den MessageHander des Plugins.
+// Sets the gauge handerer of the plugin.
 func (self *XPlanePlugin) SetMessageHandler(handler plugins.MessageHandler) {
 	self.messageHandler = handler
 }
 
-//Setzt die FlightLoop-Funktion, die beim Start des Plugins automatisch registriert werden soll.
+// Sets the Flightloop feature that is to be automatically registered when the plug-in starts.
 func (self *XPlanePlugin) SetFlightLoopFunc(flightLoopFunc processing.FlightLoopFunc, interval float32) {
 	self.flightLoop = flightLoopFunc
 	self.flightLoopInterval = interval
 }
 
-//Setzt die ErrorCallback-Funktion, die beim Start des Plugins automatisch registriert werden soll.
+// Sets the ErrorCallback function that is to be automatically registered when plug-ins starts.
 func (self *XPlanePlugin) SetErrorCallback(callback utilities.ErrorCallback) {
 	self.errorCallback = callback
 }
 
-//Setzt die Callback-Funktion für den Pluginstatuswechsel
+// Sets the callback function for plugin status change
 func (self *XPlanePlugin) SetPluginStateCallback(callback PluginStateCallback) {
 	self.stateCallback = callback
 }
@@ -134,7 +134,7 @@ func (self *XPlanePlugin) String() string {
 	return fmt.Sprintf("%v (singature: %v, id: %v)", self.GetName(), self.GetSignature(), self.GetId())
 }
 
-//Externe Schnittstellen-Methode, die von X-Plane beim Empfang einer Nachricht angesprochen wird
+// external interface method addressed by X-Plane when receiving a message
 //export XPluginReceiveMessage
 func XPluginReceiveMessage(pluginId C.int, messageId C.int, messageData unsafe.Pointer) {
 	if plugin.messageHandler != nil {
@@ -142,7 +142,7 @@ func XPluginReceiveMessage(pluginId C.int, messageId C.int, messageData unsafe.P
 	}
 }
 
-//Externe Schnittstellen-Methode, die von X-Plane beim Start des Plugins angesprochen wird
+// external interface method addressed by X-Plane when starting the plugin
 //export XPluginStart
 func XPluginStart(outName *C.char, outSig *C.char, outDesc *C.char) int {
 	plugin.onStart(outName, outSig, outDesc)
@@ -152,7 +152,7 @@ func XPluginStart(outName *C.char, outSig *C.char, outDesc *C.char) int {
 	return 1
 }
 
-//Externe Schnittstellen-Methode, die von X-Plane beim Aktivieren des Plugins angesprochen wird
+// external interface method addressed by X-Plane when activating the plugin
 //export XPluginEnable
 func XPluginEnable() int {
 	if plugin.stateCallback != nil {
@@ -161,7 +161,7 @@ func XPluginEnable() int {
 	return 1
 }
 
-//Externe Schnittstellen-Methode, die von X-Plane beim Deaktivieren des Plugins angesprochen wird
+// external interface method addressed by X-Plane when deactivating the plugin
 //export XPluginDisable
 func XPluginDisable() {
 	if plugin.stateCallback != nil {
@@ -170,7 +170,7 @@ func XPluginDisable() {
 
 }
 
-//Externe Schnittstellen-Methode, die von X-Plane beim Stoppen des Plugins angesprochen wird
+// external interface method addressed by X-Plane when stopping the plugin
 //export XPluginStop
 func XPluginStop() {
 	if plugin.stateCallback != nil {
