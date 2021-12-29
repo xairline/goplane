@@ -85,10 +85,9 @@ func AppendMenuItem(menuId MenuID, itemName string, itemRef interface{}, forceEn
 		cForceEnglish = 1
 	}
 	_, info := findMenu(menuId)
-	if info == nil {
-		return -1
+	if info != nil {
+		info.itemRefs[cItemName] = itemRef
 	}
-	info.itemRefs[cItemName] = itemRef
 	return int(C.XPLMAppendMenuItem(C.XPLMMenuID(menuId), cItemName, unsafe.Pointer(cItemName), C.int(cForceEnglish)))
 }
 

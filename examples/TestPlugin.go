@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/xairline/goplane/extra"
 	"github.com/xairline/goplane/extra/logging"
 	"github.com/xairline/goplane/xplm/menus"
@@ -32,13 +30,16 @@ func onPluginStateChanged(state extra.PluginState, plugin *extra.XPlanePlugin) {
 
 func onPluginStart() {
 	logging.Info("Plugin started")
+
 	menuId := menus.FindPluginsMenu()
-	logging.Info(fmt.Sprintf("menuId: %x", menuId))
+	menuContainerId := menus.AppendMenuItem(menuId, "TestPlugin Menu", nil, false)
+	myMenuId := menus.CreateMenu("TestPlugin Menu", menuId, menuContainerId, menuHandler, nil)
+	menus.AppendMenuItem(myMenuId, "TestPlugin Menu sub 1", "TestPlugin Menu sub 1", false)
+	menus.AppendMenuItem(myMenuId, "TestPlugin Menu sub 2", "TestPlugin Menu sub 2", false)
+}
 
-	menus.ClearAllMenuItems(menuId)
-
-	menuContainerId := menus.AppendMenuItem(menuId, "TestPlugin Menu", 0, false)
-	logging.Info(fmt.Sprintf("menuContainerId: %x", menuContainerId))
+func menuHandler(menuRef, itemRef interface{}) {
+	logging.Infof("clicked: %+v", itemRef)
 }
 
 func onPluginStop() {
