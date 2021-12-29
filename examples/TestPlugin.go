@@ -28,12 +28,14 @@ func onPluginStateChanged(state extra.PluginState, plugin *extra.XPlanePlugin) {
 	}
 }
 
+var myMenuId menus.MenuID
+
 func onPluginStart() {
 	logging.Info("Plugin started")
 
 	menuId := menus.FindPluginsMenu()
 	menuContainerId := menus.AppendMenuItem(menuId, "TestPlugin Menu", nil, false)
-	myMenuId := menus.CreateMenu("TestPlugin Menu", menuId, menuContainerId, menuHandler, nil)
+	myMenuId = menus.CreateMenu("TestPlugin Menu", menuId, menuContainerId, menuHandler, nil)
 	menus.AppendMenuItem(myMenuId, "TestPlugin Menu sub 1", "TestPlugin Menu sub 1", false)
 	menus.AppendMenuItem(myMenuId, "TestPlugin Menu sub 2", "TestPlugin Menu sub 2", false)
 }
@@ -43,6 +45,7 @@ func menuHandler(menuRef, itemRef interface{}) {
 }
 
 func onPluginStop() {
+	menus.DestroyMenu(myMenuId)
 	logging.Info("Plugin stopped")
 }
 
