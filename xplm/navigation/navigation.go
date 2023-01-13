@@ -72,7 +72,7 @@ func FindNavAid(nameFragment, idFrament string, lat, lon float32, freq int, navT
 		cLat = (*C.float)(unsafe.Pointer(&lat))
 	}
 	if lon != math.MaxFloat32 {
-		cLat = (*C.float)(unsafe.Pointer(&lon))
+		cLon = (*C.float)(unsafe.Pointer(&lon))
 	}
 	if freq != math.MaxInt32 {
 		cFreq = (*C.int)(unsafe.Pointer(&freq))
