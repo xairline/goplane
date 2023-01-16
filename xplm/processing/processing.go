@@ -91,7 +91,7 @@ func flightLoop(elapsedSinceLastCall, elapsedTimeSinceLastFlightLoop C.float, co
 		err := recover()
 		if err != nil {
 			logging.Errorf("Error during flightLoop: %v", err)
-			logging.Error(errors.Wrap(err, 1).ErrorStack())
+			logging.Errorf("%+v",err)
 		}
 	}()
 
