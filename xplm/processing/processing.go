@@ -18,7 +18,6 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/go-errors/errors"
 	"github.com/xairline/goplane"
 	"github.com/xairline/goplane/extra/logging"
 )
