@@ -22,7 +22,7 @@ import (
 )
 
 type CommandPhase int
-type CommandRef unsafe.Pointer
+type CommandRef XPLMCommandRef
 
 type CommandCallback func(command CommandRef, phase CommandPhase, ref interface{}) int
 
