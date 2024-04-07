@@ -11,7 +11,7 @@ package display
 #include <string.h>
 
 extern void drawWindowCallback(XPLMWindowID inWindowID, void* inRefcon);
-extern int windowHandleKey(XPLMWindowID inWindowID,char inChar,XPLMKeyFlags inFlags, char inVirtualKey, void* inRefcon, int losingFocus);
+extern void windowHandleKey(XPLMWindowID inWindowID, char inChar, XPLMKeyFlags inFlags, char inVirtualKey, void* inRefcon, int losingFocus);
 extern int windowHandleMouseClick(XPLMWindowID inWindowID, int x, int y, XPLMMouseStatus inMouse, void* inRefcon);
 extern XPLMCursorStatus windowHandleCursorStatus(XPLMWindowID inWindowID, int x, int y, void* inRefcon);
 extern int windowHandleMouseWheel(XPLMWindowID inWindowID,int x, int y, int wheel, int clicks, void* inRefcon);
@@ -31,7 +31,7 @@ type CursorStatus int
 type WindowID unsafe.Pointer
 
 type DrawWindow func(id WindowID, ref interface{})
-type HandleKey func(id WindowID, keyCode xplm.KeyCode, flags xplm.KeyFlags, virtualKeyCode xplm.VirtualKeyCode, ref interface{}, losingFocus bool) int
+type HandleKey func(id WindowID, keyCode xplm.KeyCode, flags xplm.KeyFlags, virtualKeyCode xplm.VirtualKeyCode, ref interface{}, losingFocus bool)
 type HandleMouseClick func(id WindowID, x, y int, status MouseStatus, ref interface{}) int
 type HandleCursorStatus func(id WindowID, x, y int, ref interface{}) CursorStatus
 type HandleMouseWheel func(id WindowID, x, y, wheel, clicks int, ref interface{}) int
@@ -82,14 +82,13 @@ func drawWindowCallback(windowId C.XPLMWindowID, ref unsafe.Pointer) {
 	regInfo.DrawWindowFunc(WindowID(windowId), regInfo.Ref)
 }
 
-// //export windowHandleKey
-//
-//	func windowHandleKey(windowId C.XPLMWindowID, char C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer, losingFocus C.int) C.int {
-//		id := (*C.char)(ref)
-//		regInfo := windows[id]
-//		return C.int(regInfo.HandleKeyFunc(WindowID(windowId), xplm.KeyCode(char), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), regInfo.Ref, losingFocus == 1))
-//	}
-//
+//export windowHandleKey
+func windowHandleKey(windowId C.XPLMWindowID, mychar C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer, losingFocus C.int) {
+	id := (*C.char)(ref)
+	regInfo := windows[id]
+	regInfo.HandleKeyFunc(WindowID(windowId), xplm.KeyCode(mychar), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), regInfo.Ref, losingFocus == 1)
+}
+
 //export windowHandleMouseClick
 func windowHandleMouseClick(windowId C.XPLMWindowID, x, y C.int, mouse C.XPLMMouseStatus, ref unsafe.Pointer) C.int {
 	id := (*C.char)(ref)

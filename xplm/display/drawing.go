@@ -92,13 +92,13 @@ func UnregisterDrawCallback(callback DrawCallback, phase DrawingPhase, wantsBefo
 	return C.XPLMUnregisterDrawCallback(C.XPLMDrawCallback_f(unsafe.Pointer(C.drawCallback)), C.XPLMDrawingPhase(phase), C.int(goplane.FromBoolToInt(wantsBefore)), unsafe.Pointer(id)) == 1
 }
 
-////export keySnifferCallback
-//func keySnifferCallback(char C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer) C.int {
-//	id := (*C.char)(ref)
-//	data, _ := keySnifferCallbacks[id]
-//	return C.int(data.callback(xplm.KeyCode(char), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), data.ref))
-//
-//}
+//export keySnifferCallback
+func keySnifferCallback(mychar C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer) C.int {
+	id := (*C.char)(ref)
+	data, _ := keySnifferCallbacks[id]
+	return C.int(data.callback(xplm.KeyCode(mychar), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), data.ref))
+
+}
 
 func RegisterKeySniffer(callback KeySnifferCallback, beforeWindows bool, ref interface{}) bool {
 	id := C.CString(goplane.IdGenerator())
