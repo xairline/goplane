@@ -15,11 +15,10 @@ extern void handleHotKey(void* inRefcon);
 */
 import "C"
 import (
-	"unsafe"
-
 	"github.com/xairline/goplane"
 	"github.com/xairline/goplane/xplm"
 	"github.com/xairline/goplane/xplm/plugins"
+	"unsafe"
 )
 
 type HotKeyCallback func(ref interface{})

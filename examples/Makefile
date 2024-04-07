@@ -10,7 +10,7 @@ mac:
 	CGO_ENABLED=1 \
 	CGO_CFLAGS="-DAPL=1 -DIBM=0 -DLIN=0" \
 	CGO_LDFLAGS="-F/System/Library/Frameworks/ -F${CURDIR}/Libraries/Mac -framework XPLM" \
-	go build -buildmode c-shared -o ~/X-Plane\ 11/Resources/plugins/dist//mac.xpl TestPlugin.go
+	go build -buildmode c-shared -o ~/X-Plane\ 12/Resources/plugins/dist//mac.xpl TestPlugin.go
 win:
 	CGO_CFLAGS="-DIBM=1 -static" \
 	CGO_LDFLAGS="-L${CURDIR}/Libraries/Win -lXPLM_64 -static-libgcc -static-libstdc++ -Wl,--exclude-libs,ALL" \

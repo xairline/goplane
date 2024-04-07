@@ -20,9 +20,9 @@ extern int windowHandleMouseWheel(XPLMWindowID inWindowID,int x, int y, int whee
 */
 import "C"
 import (
+	"github.com/xairline/goplane"
 	"unsafe"
 
-	"github.com/xairline/goplane"
 	"github.com/xairline/goplane/xplm"
 )
 
@@ -83,6 +83,7 @@ func drawWindowCallback(windowId C.XPLMWindowID, ref unsafe.Pointer) {
 }
 
 //export windowHandleKey
+
 func windowHandleKey(windowId C.XPLMWindowID, char C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer, losingFocus C.int) C.int {
 	id := (*C.char)(ref)
 	regInfo := windows[id]
@@ -90,6 +91,7 @@ func windowHandleKey(windowId C.XPLMWindowID, char C.char, flags C.XPLMKeyFlags,
 }
 
 //export windowHandleMouseClick
+
 func windowHandleMouseClick(windowId C.XPLMWindowID, x, y C.int, mouse C.XPLMMouseStatus, ref unsafe.Pointer) C.int {
 	id := (*C.char)(ref)
 	regInfo := windows[id]

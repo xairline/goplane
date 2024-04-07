@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/xairline/goplane/extra"
 	"github.com/xairline/goplane/extra/logging"
+	"github.com/xairline/goplane/xplm/display"
 	"github.com/xairline/goplane/xplm/menus"
 )
 
@@ -32,7 +33,8 @@ var myMenuId menus.MenuID
 
 func onPluginStart() {
 	logging.Info("Plugin started")
-
+	var MainWindowId display.WindowID
+	logging.Infof("%v", MainWindowId)
 	menuId := menus.FindPluginsMenu()
 	menuContainerId := menus.AppendMenuItem(menuId, "TestPlugin Menu", nil, false)
 	myMenuId = menus.CreateMenu("TestPlugin Menu", menuId, menuContainerId, menuHandler, nil)
