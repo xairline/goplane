@@ -82,16 +82,15 @@ func drawWindowCallback(windowId C.XPLMWindowID, ref unsafe.Pointer) {
 	regInfo.DrawWindowFunc(WindowID(windowId), regInfo.Ref)
 }
 
-//export windowHandleKey
-
-func windowHandleKey(windowId C.XPLMWindowID, char C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer, losingFocus C.int) C.int {
-	id := (*C.char)(ref)
-	regInfo := windows[id]
-	return C.int(regInfo.HandleKeyFunc(WindowID(windowId), xplm.KeyCode(char), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), regInfo.Ref, losingFocus == 1))
-}
-
+// //export windowHandleKey
+//
+//	func windowHandleKey(windowId C.XPLMWindowID, char C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer, losingFocus C.int) C.int {
+//		id := (*C.char)(ref)
+//		regInfo := windows[id]
+//		return C.int(regInfo.HandleKeyFunc(WindowID(windowId), xplm.KeyCode(char), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), regInfo.Ref, losingFocus == 1))
+//	}
+//
 //export windowHandleMouseClick
-
 func windowHandleMouseClick(windowId C.XPLMWindowID, x, y C.int, mouse C.XPLMMouseStatus, ref unsafe.Pointer) C.int {
 	id := (*C.char)(ref)
 	regInfo := windows[id]
