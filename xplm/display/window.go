@@ -70,6 +70,26 @@ func GetScreenSize() (width, height int) {
 	return
 }
 
+func GetScreenBoundsGlobal() (left, top, right, bottom int) {
+	C.XPLMGetScreenBoundsGlobal((*C.int)(unsafe.Pointer(&left)), (*C.int)(unsafe.Pointer(&top)), (*C.int)(unsafe.Pointer(&right)), (*C.int)(unsafe.Pointer(&bottom)))
+	return
+}
+
+func SetWindowGravity(windowId WindowID, leftGravity, topGravity, rightGravity, bottomGravity int) {
+	C.XPLMSetWindowGravity(C.XPLMWindowID(windowId), C.int(leftGravity), C.int(topGravity), C.int(rightGravity), C.int(bottomGravity))
+	return
+}
+
+func SetWindowTitle(windowId WindowID, title string) {
+	cTitle := C.CString(title)
+	defer C.free(unsafe.Pointer(cTitle))
+	C.XPLMSetWindowTitle(C.XPLMWindowID(windowId), cTitle)
+}
+
+func SetWindowResizingLimits(windowId WindowID, minW, minH, maxW, maxH int) {
+	C.XPLMSetWindowResizingLimits(C.XPLMWindowID(windowId), C.int(minW), C.int(minH), C.int(maxW), C.int(maxH))
+}
+
 func GetMouseLocation() (x, y int) {
 	C.XPLMGetMouseLocation((*C.int)(unsafe.Pointer(&x)), (*C.int)(unsafe.Pointer(&y)))
 	return
