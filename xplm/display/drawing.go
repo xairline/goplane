@@ -94,10 +94,10 @@ func UnregisterDrawCallback(callback DrawCallback, phase DrawingPhase, wantsBefo
 }
 
 //export keySnifferCallback
-func keySnifferCallback(char C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer) C.int {
+func keySnifferCallback(inchar C.char, flags C.XPLMKeyFlags, virtualKey C.char, ref unsafe.Pointer) C.int {
 	id := (*C.char)(ref)
 	data, _ := keySnifferCallbacks[id]
-	return C.int(data.callback(xplm.KeyCode(char), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), data.ref))
+	return C.int(data.callback(xplm.KeyCode(inchar), xplm.KeyFlags(flags), xplm.VirtualKeyCode(virtualKey), data.ref))
 
 }
 
