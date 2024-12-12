@@ -1,3 +1,8 @@
+# READ THIS FIRST
+https://github.com/golang/go/issues/65050
+YOU MAY NOT WANT TO USE GOLANG FOR XPLANE UNITL ABOVE IS FIXED
+
+
 # goplane (forked)
 > This is a fork with some modifications/examples to allow cross platform compile
 
